@@ -1,0 +1,42 @@
+{
+    "name": "mycools/eps",
+    "description": "A description for eps.",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jarak Kritkiattisak",
+            "email": "jarak.krit@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/mycools/eps",
+    "keywords": ["Laravel", "ElementPay"],
+    "require": {
+        "illuminate/support": "~5.7.0|~5.8.0",
+        "guzzlehttp/guzzle": "~6.0",
+        "nesbot/carbon": "^2.32"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mycools\\Eps\\": "./src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mycools\\Eps\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mycools\\Eps\\EpsServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.8"
+    }
+}
