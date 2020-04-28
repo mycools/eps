@@ -23,14 +23,14 @@ class EpsDemoController extends Controller
     }
     public function onreject(Request $request,$orderId='')
     {
-        return redirect()->route('eps.initPayment',['orderId' => $request->pid]);
+        return redirect()->route('eps.demo.initPayment',['orderId' => $request->pid]);
     }
     public function initCardPayment(Request $request,EPS $eps,$orderId='')
     {
         if($orderId){
             $payment = $eps->getStatus($orderId);
            
-            return redirect()->route('eps.initPayment',['orderId' => $payment->id]);
+            return redirect()->route('eps.demo.initPayment',['orderId' => $payment->id]);
         }else{
             $orderNo = 'INV999'.time();
             $customerId = 'CUS'.time();
@@ -39,13 +39,13 @@ class EpsDemoController extends Controller
                             ->setExpire("5 minutes")
                             ->setAmount(200)
                             ->addFee()
-                            ->onSuccess(route('eps.onSuccess',['orderNo' => $orderNo]))
-                            ->onReject(route('eps.onReject',['orderNo' => $orderNo]))
+                            ->onSuccess(route('eps.demo.onSuccess',['orderNo' => $orderNo]))
+                            ->onReject(route('eps.demo.onReject',['orderNo' => $orderNo]))
                             ->setAttr('customer_id',$customerId)
                             ->setAttr('card_id',17)
                             ->setAttr('customer_id',$customerId)
                             ->initPayment();
-            return redirect()->route('eps.initPayment',['orderId' => $payment->id]);
+            return redirect()->route('eps.demo.initPayment',['orderId' => $payment->id]);
         }
         
         
@@ -54,12 +54,13 @@ class EpsDemoController extends Controller
     {
         if($orderId){
             $payment = $eps->getStatus($orderId);
+            // dd($payment);
             $methods = $eps->setMethod($payment->service->id);
             $fee = $methods->getMinFee();
             return view('eps::initpayment',compact('payment','fee'));
         }else{
             $payment = $eps->setMethod('interbank')->setOrder('INV999'.time())->setExpire("5 minutes")->setAmount(19)->addFee()->initPayment();
-            return redirect()->route('eps.initPayment',['orderId' => $payment->id]);
+            return redirect()->route('eps.demo.initPayment',['orderId' => $payment->id]);
         }
         
         

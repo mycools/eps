@@ -28,11 +28,13 @@ trait MethodPayment{
     public function onSuccess($url)
     {
         $this->invoice['_successUrl'] = $url;
+        $this->invoice['_merchantData']['_successUrl'] = $url;
         return $this;
     }
     public function onReject($url)
     {
         $this->invoice['_rejectUrl'] = $url;
+        $this->invoice['_merchantData']['_rejectUrl'] = $url;
         return $this;
     }
     public function setExpire($expire)
@@ -81,7 +83,7 @@ trait MethodPayment{
     }
     public function setAttr($name,$val)
     {
-        $this->invoice['user_parameter'][$name] = $val;
+        $this->invoice['_merchantData'][$name] = $val;
         return $this;
     }
     public function initPayment()
@@ -89,6 +91,9 @@ trait MethodPayment{
         $invoice = $this->invoice;
         $this->invoice=[];
         $this->activeMethod=[];
+        if(isset($invoice['_merchantData'])){
+            $invoice['_merchantData']= http_build_query($invoice['_merchantData']);
+        }
         return $this->_call_expay('initPayment',$invoice);
     }
 }

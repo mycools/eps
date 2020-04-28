@@ -1,11 +1,11 @@
 <?php
-  Route::prefix('eps')->group(function(){
-    Route::get('/getMethods', 'Mycools\Eps\Http\Controllers\EpsDemoController@getMethods');
-    Route::get('/getAbout', 'Mycools\Eps\Http\Controllers\EpsDemoController@getAbout');
-    Route::get('/initPayment/{orderId?}', 'Mycools\Eps\Http\Controllers\EpsDemoController@initPayment')->name('eps.initPayment');
-    Route::get('/initCardPayment/{orderId?}', 'Mycools\Eps\Http\Controllers\EpsDemoController@initCardPayment')->name('eps.initCardPayment');
-    Route::get('/success/{orderId?}', 'Mycools\Eps\Http\Controllers\EpsDemoController@onsuccess')->name('eps.onSuccess');
-    Route::get('/reject/{orderId?}', 'Mycools\Eps\Http\Controllers\EpsDemoController@onreject')->name('eps.onReject');
+  Route::prefix('eps')->name('eps.demo.')->namespace('Mycools\Eps\Http\Controllers')->group(function(){
+    Route::get('/getMethods', 'EpsDemoController@getMethods');
+    Route::get('/getAbout', 'EpsDemoController@getAbout');
+    Route::get('/initPayment/{orderId?}', 'EpsDemoController@initPayment')->name('initPayment');
+    Route::get('/initCardPayment/{orderId?}', 'EpsDemoController@initCardPayment')->name('initCardPayment');
+    Route::get('/success/{orderId?}', 'EpsDemoController@onsuccess')->name('onSuccess');
+    Route::get('/reject/{orderId?}', 'EpsDemoController@onreject')->name('onReject');
   });
 
 

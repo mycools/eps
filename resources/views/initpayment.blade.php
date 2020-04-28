@@ -11,9 +11,9 @@
     <div class="container-md">
   
     <p>
-      <a class="btn btn-primary" href="{{ route('eps.initPayment') }}">New Invoice QR Pay</a>
-      <a class="btn btn-primary" href="{{ route('eps.initCardPayment') }}">New Invoice Kbank Card</a>
-      <a class="btn btn-primary" href="{{ route('eps.initPayment',['paymentId' => $payment->id]) }}">Refresh Status</a>
+      <a class="btn btn-primary" href="{{ route('eps.demo.initPayment') }}">New Invoice QR Pay</a>
+      <a class="btn btn-primary" href="{{ route('eps.demo.initCardPayment') }}">New Invoice Kbank Card</a>
+      <a class="btn btn-primary" href="{{ route('eps.demo.initPayment',['paymentId' => $payment->id]) }}">Refresh Status</a>
     </p>
   <table class="table table-bordered">
     <tr>
